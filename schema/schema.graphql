@@ -1,0 +1,76 @@
+# Must be declared for valid schema
+directive @Entry on OBJECT
+
+type Page @Entry {
+    id: ID! # This field is required for all types with `@Entry` directive
+    title: LocalizedString
+    contentElements: [ContentElement!] # Referenced internally by `id`
+    slug: LocalizedString
+    seo: SEO
+}
+
+# Individual pieces of content that make up a page; extend this with additional elements as needed
+union ContentElement =
+    | Hero
+    | SectionTitle
+    | Markdown
+
+# A type with `@Entry` directive can exist on its own and be linked to from other fields
+type Hero @Entry {
+    id: ID!
+    heading: LocalizedString
+    image: ImageReference
+    imagePosition: ImagePosition
+}
+
+type SectionTitle @Entry {
+    id: ID!
+    heading: LocalizedString
+    body: LocalizedString
+}
+
+type ImageReference {
+    filePath: LocalizedString! # Using `LocalizedString` lets us specify a different image file per locale
+}
+
+enum ImagePosition {
+    aboveHeading
+    belowHeading
+}
+
+type Header @Entry {
+    id: ID!
+    logo: ImageReference
+    navigationMenus: [NavigationMenu!]
+}
+
+type NavigationMenu {
+    menuEntries: [NavigationMenuEntry!]
+}
+
+type NavigationMenuEntry {
+    label: LocalizedString
+    linkTo: Page # `Page` has `@Entry` so this is stored as a reference using the Page's `id`
+}
+
+type Markdown @Entry {
+    id: ID!
+    body: LocalizedString
+}
+
+# Basic example; extend with additional fields as needed
+type SEO {
+    metaTags: [MetaTag!]
+}
+
+type MetaTag {
+    name: String!
+    content: LocalizedString!
+}
+
+# When adding locales here, localization options expand for all fields using this type
+type LocalizedString {
+    de_DE: String
+    en_US: String
+    fr: String
+}
