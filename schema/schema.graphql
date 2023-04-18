@@ -1,11 +1,12 @@
 # Must be declared for valid schema
 directive @Entry on OBJECT
 
+# A type with `@Entry` directive exists on its own and can be referenced elsewhere
 type Page @Entry {
     id: ID! # This field is required for all types with `@Entry` directive
-    title: LocalizedString
-    contentElements: [ContentElement!] # Referenced internally by `id`
-    slug: LocalizedString
+    title: String!
+    contentElements: [ContentElement!]!
+    slug: String!
     seo: SEO
 }
 
@@ -13,24 +14,22 @@ type Page @Entry {
 union ContentElement =
     | Hero
     | SectionTitle
-    | Markdown
+    | Body
 
-# A type with `@Entry` directive can exist on its own and be linked to from other fields
-type Hero @Entry {
-    id: ID!
-    heading: LocalizedString
+# Types that don't have @Entry can only exist as siblings of an @Entry type and don't have their own identity
+type Hero {
+    heading: String!
     image: ImageReference
     imagePosition: ImagePosition
 }
 
-type SectionTitle @Entry {
-    id: ID!
-    heading: LocalizedString
-    body: LocalizedString
+type SectionTitle {
+    heading: String!
+    body: String!
 }
 
 type ImageReference {
-    filePath: LocalizedString! # Using `LocalizedString` lets us specify a different image file per locale
+    filePath: String!
 }
 
 enum ImagePosition {
@@ -38,6 +37,7 @@ enum ImagePosition {
     belowHeading
 }
 
+# Our header exists independent of pages and therefore gets its own @Entry identity
 type Header @Entry {
     id: ID!
     logo: ImageReference
@@ -45,32 +45,24 @@ type Header @Entry {
 }
 
 type NavigationMenu {
-    menuEntries: [NavigationMenuEntry!]
+    menuEntries: [NavigationMenuEntry!]!
 }
 
 type NavigationMenuEntry {
-    label: LocalizedString
+    label: String!
     linkTo: Page # `Page` has `@Entry` so this is stored as a reference using the Page's `id`
 }
 
-type Markdown @Entry {
-    id: ID!
-    body: LocalizedString
+type Body {
+    body: String!
 }
 
-# Basic example; extend with additional fields as needed
 type SEO {
-    metaTags: [MetaTag!]
+    metaTags: [MetaTag!]!
+    # This is just an example; extend with additional fields as needed
 }
 
 type MetaTag {
     name: String!
-    content: LocalizedString!
-}
-
-# When adding locales here, localization options expand for all fields using this type
-type LocalizedString {
-    de_DE: String
-    en_US: String
-    fr: String
+    value: String!
 }
