@@ -1,0 +1,7 @@
+metadata:
+  type: Header
+data:
+  headerMenuEntries:
+    - label: Home
+      linkTo:
+        id: 799942e0-fa1d-445a-ad53-2e7909dae102
