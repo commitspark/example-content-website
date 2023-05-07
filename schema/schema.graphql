@@ -32,7 +32,10 @@ type SectionTitle {
 }
 
 type ImageReference {
-    filePath: String!
+    absoluteUrl: String!
+    width: Int!
+    height: Int!
+    altText: String!
 }
 
 enum ImagePosition {
@@ -43,17 +46,13 @@ enum ImagePosition {
 # Our header exists independent of pages and therefore gets its own @Entry identity
 type Header @Entry {
     id: ID!
-    logo: ImageReference
-    navigationMenus: [NavigationMenu!]
+    headerMenuEntries: [HeaderMenuEntry!]!
 }
 
-type NavigationMenu {
-    menuEntries: [NavigationMenuEntry!]!
-}
-
-type NavigationMenuEntry {
+type HeaderMenuEntry {
     label: String!
-    linkTo: Page # `Page` has `@Entry` so this is stored as a reference using the Page's `id`
+    # `Page` has `@Entry`, so only the page ID is stored here; when querying, this reference is resolved automatically
+    linkTo: Page!
 }
 
 type Body {
