@@ -15,14 +15,17 @@ data:
         heading: Content Operations First
         body: Improve your content management workflows with Contentlab
     - body:
-        body: Get rid of most content coordination work by building unrelated content in
-          separate branches. This makes it impossible to accidentally publish
-          someone else's content that was not yet meant to go into production.
-          Once content in a branch is ready, use Pull Requests to review all
-          additions, changes, and deletions contained in the branch side by side
-          against existing published content. In your Pull Request, comment and
-          iterate content as needed. When ready, apply the Pull Request and your
-          content is merged into production.
+        body: >-
+          ## Branching support
+
+
+          Reduce content coordination work by building content in separate branches. This prevents unrelated content changes from getting mixed up. Compared to other CMSs, there is no "publishing", but you should consider your `main` branch as the one containing published content.
+
+
+          ## Pull requests
+
+
+          Once content in a branch is ready, use Pull Requests to review all additions, changes, and deletions contained in the branch side by side against existing published content. In your Pull Request, comment and iterate content as needed. When ready, apply the Pull Request and your content is merged.
   slug: ""
   seo:
     metaTags:
