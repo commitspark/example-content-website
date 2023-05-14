@@ -1,10 +1,9 @@
-# Contentlab Example: Component-based Website
+# Commitspark Example: Component-based Website
 
-Follow these three steps to start using [Contentlab](https://github.com/contentlab-sh/contentlab), the Git-based
-composable CMS:
+Follow these three steps to start using [Commitspark](https://commitspark.com), the workflow-first Content Management System based on Git and GraphQL:
 
-1. [Copy this template](https://github.com/contentlab-sh/example-content-website/generate)
-2. [Sign in with GitHub to Contentlab](https://contentlab.sh/en-us/sign-in/)
+1. [Copy this template](https://github.com/commitspark/example-content-website/generate)
+2. [Sign in with GitHub to Commitspark](https://commitspark.com/en-us/sign-in/)
 3. Select your repository copy and start editing
 
 All content you create will be written to your repository on GitHub.
