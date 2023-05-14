@@ -1,19 +1,19 @@
 metadata:
   type: Page
 data:
-  title: Welcome to Contentlab
+  title: Welcome to Commitspark
   contentElements:
     - hero:
-        heading: Welcome to Contentlab
+        heading: Welcome to Commitspark
         image:
-          absoluteUrl: https://contentlab-example-assets.s3.eu-central-1.amazonaws.com/agency-whiteboard.png
+          absoluteUrl: https://commitspark-example-assets.s3.eu-central-1.amazonaws.com/agency-whiteboard.png
           width: 1200
           height: 600
-          altText: Hello Contentlab
+          altText: Hello Commitspark
         imagePosition: belowHeading
     - sectionTitle:
         heading: Content Operations First
-        body: Improve your content management workflows with Contentlab
+        body: Improve your content management workflows with Commitspark
     - body:
         body: >-
           ## Branching support
@@ -30,4 +30,4 @@ data:
   seo:
     metaTags:
       - name: title
-        value: Welcome to Contentlab
+        value: Welcome to Commitspark
