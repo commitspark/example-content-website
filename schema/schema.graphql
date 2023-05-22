@@ -21,7 +21,7 @@ union ContentElement =
     | SectionTitle
     | Body
 
-# Types that don't have @Entry can only exist as siblings of an @Entry type and do not have their own identity
+# Types that don't have @Entry can only exist as children of an @Entry type and do not have their own identity
 type Hero {
     heading: String!
     image: ImageReference
