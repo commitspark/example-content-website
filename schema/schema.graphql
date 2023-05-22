@@ -1,7 +1,7 @@
-# Required for Contentlab to determine which content types have their own identity
+# Required for Commitspark to determine which content types have their own identity
 directive @Entry on OBJECT
 
-# This directive lets us improve the editing experience on contentlab.sh
+# This directive lets us improve the editing experience on commitspark.com
 # "visibleList" defines which field(s) of @Entry types should be shown in list views
 # "editor" allows selecting a specialized editing UI for a field
 directive @Ui(visibleList:Boolean, editor:String) on FIELD_DEFINITION
