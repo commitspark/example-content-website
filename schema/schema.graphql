@@ -1,43 +1,38 @@
-# Required for Commitspark to determine which content types have their own identity
 directive @Entry on OBJECT
 
-# This directive lets us improve the editing experience on commitspark.com
-# "visibleList" defines which field(s) of @Entry types should be shown in list views
-# "editor" allows selecting a specialized editing UI for a field
 directive @Ui(visibleList:Boolean, editor:String) on FIELD_DEFINITION
+directive @Ai(instruction:String) on OBJECT | FIELD_DEFINITION
 
-# A type with `@Entry` directive has its own identity and can be referenced elsewhere
 type Page @Entry {
-    id: ID! # Required for all types with `@Entry` directive
-    title: String! @Ui(visibleList:true)
+    id: ID! @Ai(instruction: "Do not fill or modify this field.")
+    internalName: String! @Ui(visibleList:true)
+    title: LocalizedString!
     contentElements: [ContentElement!]!
-    slug: String! @Ui(visibleList:true)
+    slug: LocalizedString!
     seo: SEO
 }
 
-# Individual components of content that make up a page; extend this with additional elements as needed
 union ContentElement =
     | Hero
     | SectionTitle
-    | Body
+    | Text
 
-# Types that don't have @Entry can only exist as children of an @Entry type and do not have their own identity
-type Hero {
-    heading: String!
+type Hero @Ai(instruction: "Use only as the first component of a page.") {
+    heading: LocalizedString! @Ai(instruction: "Must be a catchy headline with five words or less.")
     image: ImageReference
     imagePosition: ImagePosition
 }
 
 type SectionTitle {
-    heading: String!
-    body: String!
+    heading: LocalizedString!
+    body: LocalizedString!
 }
 
 type ImageReference {
     absoluteUrl: String!
     width: Int!
     height: Int!
-    altText: String!
+    altText: LocalizedString!
 }
 
 enum ImagePosition {
@@ -45,28 +40,35 @@ enum ImagePosition {
     belowHeading
 }
 
-# Our header exists independent of pages and therefore gets its own @Entry identity
 type Header @Entry {
     id: ID!
     headerMenuEntries: [HeaderMenuEntry!]!
 }
 
 type HeaderMenuEntry {
-    label: String!
-    # `Page` has `@Entry`, so only the page ID is stored here; when querying, this reference is resolved automatically
+    label: LocalizedString!
     linkTo: Page!
 }
 
-type Body {
-    body: String! @Ui(editor: "markdown")
+type Text {
+    body: LocalizedMarkdownString! @Ai(instruction: "Write prose text only. Do not use bullet points. Use multiple 'Text' components instead of line breaks.")
 }
 
 type SEO {
     metaTags: [MetaTag!]!
-    # This is just an example; extend with additional fields as needed
 }
 
 type MetaTag {
     name: String!
     value: String!
+}
+
+type LocalizedString {
+    en: String! @Ai(instruction: "English text here.")
+    de: String! @Ai(instruction: "German text here.")
+}
+
+type LocalizedMarkdownString {
+    en: String! @Ui(editor: "markdown") @Ai(instruction: "English text here. This field must be filled with text in markdown format. Special characters are to be encoded with a single backslash.")
+    de: String! @Ui(editor: "markdown") @Ai(instruction: "German text here. This field must be filled with text in markdown format. Special characters are to be encoded with a single backslash.")
 }
