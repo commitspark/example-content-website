@@ -51,7 +51,7 @@ type HeaderMenuEntry {
 }
 
 type Text {
-    body: LocalizedMarkdownString! @Ai(instruction: "Write prose text only. Do not use bullet points. Use multiple 'Text' components instead of line breaks.")
+    body: LocalizedMarkdownString! @Ai(instruction: "Write prose text only with short paragraphs for easy reading on screen. Do not use bullet points.")
 }
 
 type SEO {
