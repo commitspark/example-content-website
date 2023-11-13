@@ -2,6 +2,8 @@ metadata:
   type: Header
 data:
   headerMenuEntries:
-    - label: SIX56
+    - label:
+        en: SIX56
+        de: SIX56
       linkTo:
         id: 77e7a93b-e390-452a-a50d-f50e0ae5de02
