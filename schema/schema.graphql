@@ -14,17 +14,12 @@ type Page @Entry {
 
 union ContentElement =
     | Hero
-    | SectionTitle
     | Text
 
 type Hero @Ai(instruction: "Use only as the first component of a page.") {
     heading: LocalizedString! @Ai(instruction: "Must be a catchy headline with five words or less.")
     image: ImageReference
     imagePosition: ImagePosition
-}
-
-type SectionTitle @Ai(instruction: "Use this to split the page into separate topics. Follow each 'SectionTitle' by at least one 'Text' component.") {
-    heading: LocalizedString!
 }
 
 type ImageReference {
