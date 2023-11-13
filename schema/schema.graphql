@@ -23,9 +23,8 @@ type Hero @Ai(instruction: "Use only as the first component of a page.") {
     imagePosition: ImagePosition
 }
 
-type SectionTitle @Ai(instruction: "Use this to split the page into separate topics.") {
+type SectionTitle @Ai(instruction: "Use this to split the page into separate topics. Follow each 'SectionTitle' by at least one 'Text' component.") {
     heading: LocalizedString!
-    body: LocalizedString!
 }
 
 type ImageReference {
@@ -64,8 +63,8 @@ type MetaTag {
 }
 
 type LocalizedString {
-    en: String! @Ai(instruction: "English text here.")
-    de: String! @Ai(instruction: "German text here.")
+    en: String! @Ai(instruction: "English text here. Do not apply formatting.")
+    de: String! @Ai(instruction: "German text here. Do not apply formatting.")
 }
 
 type LocalizedMarkdownString {
