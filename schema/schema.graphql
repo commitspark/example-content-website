@@ -23,7 +23,7 @@ type Hero @Ai(instruction: "Use only as the first component of a page.") {
     imagePosition: ImagePosition
 }
 
-type SectionTitle {
+type SectionTitle @Ai(instruction: "Use this to split the page into separate topics.") {
     heading: LocalizedString!
     body: LocalizedString!
 }
