@@ -23,7 +23,7 @@ type Hero @Ai(instruction: "Use only as the first component of a page.") {
 }
 
 type ImageReference {
-    absoluteUrl: String!
+    imageId: String! @Ai(instruction: "If a product ID is available, use it as an imageId.")
     width: Int!
     height: Int!
     altText: LocalizedString!
