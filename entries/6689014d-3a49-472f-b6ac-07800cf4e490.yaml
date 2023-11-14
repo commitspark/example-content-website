@@ -3,6 +3,11 @@ metadata:
 data:
   headerMenuEntries:
     - label:
+        en: Home
+        de: Start
+      linkTo:
+        id: c54e5d18-8ce6-4b7d-a32a-f6d8457714dd
+    - label:
         en: SIX56
         de: SIX56
       linkTo:
