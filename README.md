@@ -14,4 +14,4 @@ In this example, we have a content model ready to manage content for a multi-lan
 content components.
 
 It is meant as a starting-point for building your own content model by
-[extending the schema file](schema/schema.graphql) using standard GraphQL types.
+[extending the schema file](commitspark/schema/schema.graphql) using standard GraphQL types.
