@@ -1,0 +1,76 @@
+name: Validate
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'commitspark/**'
+jobs:
+  validate:
+    runs-on: ubuntu-22.04
+
+    permissions:
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: npm i @commitspark/graphql-api @commitspark/git-adapter-filesystem
+
+      - name: Validate
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { getApiService } = require('@commitspark/graphql-api')
+            const { createAdapter } = require('@commitspark/git-adapter-filesystem')
+            
+            const gitAdapter = createAdapter()
+            await gitAdapter.setRepositoryOptions({
+              checkedOutCommitHash: context.sha,
+              pathSchemaFile: `${process.env.GITHUB_WORKSPACE}/commitspark/schema/schema.graphql`,
+              pathEntryFolder: `${process.env.GITHUB_WORKSPACE}/commitspark/entries/`,
+            })
+            
+            const query = `query {
+              data: allPages {
+                id
+                contentElements {
+                  ... on Hero {
+                    image {
+                      imageId
+                    }
+                  }
+                }
+              }
+            }`
+            
+            const apiService = await getApiService()
+            const response = await apiService.postGraphQL(gitAdapter, context.sha, {
+              query,
+            })
+            
+            const pagesWithInvalidImageIds = response?.data.data.filter((page) => {
+              return page.contentElements.filter((contentElement) => {
+                return !!contentElement.image && contentElement.image.imageId.includes('invalid')
+              }).length > 0
+            })
+
+            if (pagesWithInvalidImageIds.length === 0) {
+              return
+            }
+            
+            const pageIds = pagesWithInvalidImageIds.map((page) => page.id)
+            
+            const errorMessage = `Invalid image IDs in pages "${pageIds.join(', ')}".`
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: errorMessage,
+            })
+            core.setOutput('pageIds', pageIds)
+            core.setFailed(errorMessage)
