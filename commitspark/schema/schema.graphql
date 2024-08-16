@@ -1,10 +1,9 @@
 directive @Entry on OBJECT
 
 directive @Ui(visibleList:Boolean, editor:String) on FIELD_DEFINITION
-directive @Ai(instruction:String) on OBJECT | FIELD_DEFINITION
 
 type Page @Entry {
-    id: ID! @Ai(instruction: "Do not fill or modify this field.")
+    id: ID!
     internalName: String! @Ui(visibleList:true)
     title: LocalizedString!
     contentElements: [ContentElement!]!
@@ -16,14 +15,14 @@ union ContentElement =
     | Hero
     | Text
 
-type Hero @Ai(instruction: "Use only as the first component of a page.") {
-    heading: LocalizedString! @Ai(instruction: "Must be a catchy headline with five words or less.")
+type Hero {
+    heading: LocalizedString!
     image: ImageReference
     imagePosition: ImagePosition
 }
 
 type ImageReference {
-    imageId: String! @Ai(instruction: "If a product ID is available, use it as an imageId.")
+    imageId: String!
     width: Int!
     height: Int!
     altText: LocalizedString!
@@ -45,7 +44,7 @@ type HeaderMenuEntry {
 }
 
 type Text {
-    body: LocalizedMarkdownString! @Ai(instruction: "Write prose text only with short paragraphs for easy reading on screen. Do not use bullet points.")
+    body: LocalizedMarkdownString!
 }
 
 type SEO {
@@ -58,11 +57,11 @@ type MetaTag {
 }
 
 type LocalizedString {
-    en: String! @Ai(instruction: "English text here. Do not apply formatting.")
-    de: String! @Ai(instruction: "German text here. Do not apply formatting.")
+    en: String!
+    de: String!
 }
 
 type LocalizedMarkdownString {
-    en: String! @Ui(editor: "markdown") @Ai(instruction: "English text here. This field must be filled with text in markdown format. Special characters are to be encoded with a single backslash.")
-    de: String! @Ui(editor: "markdown") @Ai(instruction: "German text here. This field must be filled with text in markdown format. Special characters are to be encoded with a single backslash.")
+    en: String! @Ui(editor: "markdown")
+    de: String! @Ui(editor: "markdown")
 }
