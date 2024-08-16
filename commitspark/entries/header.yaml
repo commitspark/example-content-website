@@ -6,9 +6,9 @@ data:
         en: Home
         de: Start
       linkTo:
-        id: c54e5d18-8ce6-4b7d-a32a-f6d8457714dd
+        id: page-index
     - label:
         en: SIX56
         de: SIX56
       linkTo:
-        id: 77e7a93b-e390-452a-a50d-f50e0ae5de02
+        id: page-sphere-six56
