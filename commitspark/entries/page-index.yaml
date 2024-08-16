@@ -5,19 +5,19 @@ metadata:
 data:
   internalName: Landing page
   title:
-    en: Commitspark Next.js example
-    de: Commitspark Next.js Beispiel
+    en: Commitspark Content Management example
+    de: Commitspark Content Management Beispiel
   contentElements:
     - text:
         body:
           en: |-
             ## Welcome!
 
-            This is the [Commitspark](https://commitspark.com) Next.js example.
+            This is the [Commitspark](https://commitspark.com) Content Management example.
           de: |-
             ## Willkommen!
 
-            Das ist das [Commitspark](https://commitspark.com) Next.js Beispiel.
+            Das ist das [Commitspark](https://commitspark.com) Content Management Beispiel.
   slug:
     en: ""
     de: ""
