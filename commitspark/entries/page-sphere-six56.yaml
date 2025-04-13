@@ -8,7 +8,7 @@ data:
     en: Sphere Mountain Bike AUDIO SIX56 F:83 MLF 29
     de: Sphere Mountain Bike AUDIO SIX56 F:83 MLF 29
   contentElements:
-    - hero:
+    - Hero:
         heading:
           en: Introducing the Sphere Mountain Bike AUDIO SIX56 F:83 MLF 29
           de: Wir präsentieren das Sphere Mountain Bike AUDIO SIX56 F:83 MLF 29
@@ -21,7 +21,7 @@ data:
             de: Schickes Sphere Mountain Bike AUDIO SIX56 F:83 MLF 29 in charcoal'n'onyx
               Farbe
         imagePosition: aboveHeading
-    - text:
+    - Text:
         body:
           en: >-
             The **Sphere Mountain Bike AUDIO SIX56 F:83 MLF 29** redefines your

@@ -8,7 +8,7 @@ data:
     en: Commitspark Content Management example
     de: Commitspark Content Management Beispiel
   contentElements:
-    - text:
+    - Text:
         body:
           en: |-
             ## Welcome!
