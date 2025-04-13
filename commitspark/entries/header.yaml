@@ -3,7 +3,7 @@ metadata:
 data:
   headerMenuEntries:
     - label:
-        en: Home
+        en: Home1
         de: Start
       linkTo:
         id: page-index
