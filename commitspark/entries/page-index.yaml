@@ -11,11 +11,11 @@ data:
     - Text:
         body:
           en: |-
-            ## Welcome!
+            ## Welcome!!!
 
             This is the [Commitspark](https://commitspark.com) Content Management example.
           de: |-
-            ## Willkommen!
+            ## Willkommen!!!
 
             Das ist das [Commitspark](https://commitspark.com) Content Management Beispiel.
   slug:
