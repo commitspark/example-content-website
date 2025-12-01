@@ -29,8 +29,7 @@ jobs:
             const { createClient } = require('@commitspark/graphql-api')
             const { createAdapter } = require('@commitspark/git-adapter-filesystem')
             
-            const gitAdapter = createAdapter()
-            await gitAdapter.setRepositoryOptions({
+            const gitAdapter = createAdapter({
               checkedOutCommitHash: context.sha,
               pathSchemaFile: `${process.env.GITHUB_WORKSPACE}/commitspark/schema/schema.graphql`,
               pathEntryFolder: `${process.env.GITHUB_WORKSPACE}/commitspark/entries/`,
